@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>update</title>
+  </head>
+  <body>
+    <h3>update</h3>
+    <!-- {{#users}} -->
+<div class="updateUserContainer">
+    <form class="" action="/update_user/{{id}}" method="post">
+      <input type="text" name="name" value="{{name}}">
+      <br>
+      <input type="email" name="email" value="{{email}}">
+      <br>
+      <textarea name="bio" rows="6" cols="40" value="{{bio}}">{{bio}}</textarea>
+      <br>
+      <input type="submit"value="Submit Update">
+    </form>
+<div>
+  <!-- {{/users}} -->
+  </body>
+</html>

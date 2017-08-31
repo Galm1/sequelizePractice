@@ -28,6 +28,12 @@ app.get('/addUser', function(req, res) {
   res.render('addUser');
 })
 
+app.get('/update/:id', function(req, res) {
+  models.User.findById(req.params.id).then(function(users){
+    res.render('update', {users: users})
+  })
+})
+
 app.post('/create_user', function(req, res) {
   let nameV = req.body.name;
   let emailV = req.body.email;
@@ -49,6 +55,23 @@ app.post('/delete_user/:id', function(req, res) {
       res.redirect('/users');
     });
 })
+
+app.post('/update_user/:id', function(req, res) {
+  let nameV = req.body.name;
+  let emailV = req.body.email;
+  let bioV = req.body.bio;
+  models.User.update({
+    name: nameV,
+    email: emailV,
+    bio: bioV
+  },{where: {id: req.params.id}})
+  .then(function (){
+    res.redirect('/users');
+  })
+})
+
+
+
 
 
 
