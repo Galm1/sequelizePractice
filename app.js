@@ -2,7 +2,7 @@ const express = require('express'),
   mustacheExpress = require('mustache-express'),
   bodyParser = require('body-parser'),
   sequelize = require('sequelize')
-models = require("./models");
+  models = require("./models");
 
 const app = express();
 
@@ -18,8 +18,14 @@ app.get('/', function(req, res) {
   res.render("index");
 })
 
+app.get('/users', function(req, res) {
+  models.User.findAll().then(function(users){
+    res.render('users', {users: users})
+  })
+})
+
 app.listen(3000, function() {
-  console.log('Express running on http://localhost:3000/.')
+  console.log('WE ARE RUNNING ON http://localhost:3000/.')
 });
 
 process.on('SIGINT', function() {
