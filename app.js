@@ -24,6 +24,41 @@ app.get('/users', function(req, res) {
   })
 })
 
+app.get('/addUser', function(req, res) {
+  res.render('addUser');
+})
+
+app.post('/create_user', function(req, res) {
+  let nameV = req.body.name;
+  let emailV = req.body.email;
+  let bioV = req.body.bio;
+  console.log(nameV, emailV, bioV);
+  const user = models.User.build({
+    name: nameV,
+    email: emailV,
+    bio: bioV
+  })
+  user.save().then(function () {
+    res.redirect('/users')
+  })
+})
+
+app.post('/delete_user/:id', function(req, res) {
+  models.User.destroy({where: {id: req.params.id}})
+    .then(function (){
+      res.redirect('/users');
+    });
+})
+
+
+
+
+
+
+
+
+
+
 app.listen(3000, function() {
   console.log('WE ARE RUNNING ON http://localhost:3000/.')
 });
